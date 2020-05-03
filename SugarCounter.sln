@@ -9,18 +9,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarCounter.DataAccess", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C2C60A4C-E90D-44E5-8EAF-B939CAD8E259}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit", "Tests\Unit\Unit.csproj", "{B63FA4C6-587B-47AC-872D-825486044E7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unit", "Tests\Unit\Unit.csproj", "{B63FA4C6-587B-47AC-872D-825486044E7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integrational", "Tests\Integrational\Integrational.csproj", "{C503640E-CB06-47D2-ABC3-399C526C17EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration", "Tests\Integration\Integration.csproj", "{C503640E-CB06-47D2-ABC3-399C526C17EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functional", "Tests\Functional\Functional.csproj", "{6A4F49BE-9E85-49E8-BFCF-9BE53A1B2986}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Functional", "Tests\Functional\Functional.csproj", "{6A4F49BE-9E85-49E8-BFCF-9BE53A1B2986}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E38E7DE-CA9E-4577-96BA-C338FE619234}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugarCounter.Core", "SugarCounter.Core\SugarCounter.Core.csproj", "{E1A9548B-DE89-48DF-8DD6-E41E459BD3F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SugarCounter.Core", "SugarCounter.Core\SugarCounter.Core.csproj", "{E1A9548B-DE89-48DF-8DD6-E41E459BD3F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
