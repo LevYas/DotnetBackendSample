@@ -22,7 +22,7 @@ namespace SugarCounter.DataAccess.Repositories
             _logger = logger;
         }
 
-        public async Task<FoodItem> Create(NewFoodInput foodInput)
+        public async Task<FoodItem?> Create(NewFoodInput foodInput)
         {
             var item = new FoodItem
             {
@@ -33,10 +33,18 @@ namespace SugarCounter.DataAccess.Repositories
             };
 
             _context.FoodItems.Add(item);
-            await _context.SaveChangesAsync();
-            _context.Entry(item).State = EntityState.Detached;
 
-            return item;
+            try
+            {
+                await _context.SaveChangesAsync();
+                _context.Entry(item).State = EntityState.Detached;
+                return item;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to create new item");
+                return null;
+            }
         }
 
         public async Task<bool> Delete(FoodItem item)
@@ -48,8 +56,9 @@ namespace SugarCounter.DataAccess.Repositories
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Failed to delete item");
                 return false;
             }
         }
@@ -85,9 +94,17 @@ namespace SugarCounter.DataAccess.Repositories
                 return false;
 
             _context.Entry(newValue).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
 
-            return true; // How to improve: return false in case of exceptions
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to update item");
+                return false;
+            }
         }
 
         private async Task<FoodItem?> getItemById(int itemId)

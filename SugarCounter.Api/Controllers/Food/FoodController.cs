@@ -36,9 +36,12 @@ namespace SugarCounter.Api.Controllers.Food
             DateTime whenAdded = inputDto.WhenAdded ?? DateTime.Now;
 
             var newFood = new NewFoodInput(userId, inputDto.Description.Trim(), sugar, whenAdded);
-            FoodItem foodItem = await _repository.Create(newFood);
+            FoodItem? foodItem = await _repository.Create(newFood);
 
-            return new FoodItemDto(foodItem);
+            if (foodItem != null)
+                return new FoodItemDto(foodItem);
+            else
+                return Problem();
         }
 
         [HttpGet("{itemId}")]

@@ -59,7 +59,7 @@ namespace SugarCounter.DataAccess.Repositories
                     return CreateUserError.UserAlreadyExists;
                 }
 
-                _logger.LogError(ex, "Failed to create new user");
+                _logger.LogError(ex, "Failed to create new item");
                 return CreateUserError.Unknown;
             }
         }
@@ -75,7 +75,7 @@ namespace SugarCounter.DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to delete user");
+                _logger.LogError(ex, "Failed to delete item");
                 return false;
             }
         }
@@ -104,7 +104,7 @@ namespace SugarCounter.DataAccess.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to retrieve list of users");
+                _logger.LogError(ex, "Failed to retrieve list of items");
                 return null;
             }
         }
@@ -118,8 +118,9 @@ namespace SugarCounter.DataAccess.Repositories
                 await _context.SaveChangesAsync();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Failed to update item");
                 return false;
             }
         }
