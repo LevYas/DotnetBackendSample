@@ -9,12 +9,12 @@ namespace SugarCounter.Core.Food
             UserId = userId;
             Description = description;
             SugarMass = sugarMass;
-            WhenAte = whenAte;
+            WhenAdded = whenAte;
         }
 
         public int UserId { get; }
         public string Description { get; }
         public int SugarMass { get; }
-        public DateTime WhenAte { get; }
+        public DateTime WhenAdded { get; }
     }
 }

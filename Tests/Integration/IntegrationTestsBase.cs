@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging.Abstractions;
 using SugarCounter.Api;
 using SugarCounter.Core.Food;
 using SugarCounter.Core.Sessions;
@@ -18,11 +19,14 @@ namespace Integration
         {
             DbContext = new AppDbContext(createNewContextOptions());
             DbInitializer.Initialize(DbContext);
+            UsersRepo = new UsersRepository(DbContext, new NullLogger<UsersRepository>());
+            AuthRepo = new SessionsRepository(DbContext);
+            FoodRepo = new FoodRepository(DbContext, new NullLogger<FoodRepository>());
         }
 
-        protected IUsersRepository UsersRepo { get; } = new UsersRepository();
-        protected ISessionsRepository AuthRepo { get; } = new SessionsRepository();
-        protected IFoodRepository FoodRepo { get; } = new FoodRepository();
+        protected IUsersRepository UsersRepo { get; }
+        protected ISessionsRepository AuthRepo { get; }
+        protected IFoodRepository FoodRepo { get; }
 
         protected RequestContext AdminContext { get; } = new RequestContext
             {
