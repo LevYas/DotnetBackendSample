@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging.Abstractions;
 using SugarCounter.Api.Controllers.Food;
 using SugarCounter.Api.Controllers.Food.Dto;
-using SugarCounter.Core.Food;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,20 +13,17 @@ namespace Integration.Api.Controllers.Food
 {
     public class FoodControllerTestsBase : IntegrationTestsBase
     {
-        protected readonly IFoodRepository Repository;
         protected readonly FoodController Controller;
 
         public FoodControllerTestsBase()
         {
-            Repository = GetFoodRepository();
-
             var builder = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string> {
                     { "NutritionixKeys:ServerUrl", "https://nutritionix_url_here.com/" },
                 });
             var nutritionixClient = new NutritionixClient(builder.Build(), new HttpClient(), new NullLogger<NutritionixClient>());
 
-            Controller = new FoodController(Repository, nutritionixClient, GetContextForAdmin());
+            Controller = new FoodController(FoodRepo, nutritionixClient, AdminContext);
         }
 
         protected FoodItemInputDto CreateFoodInput(int? sugar = null, DateTime? whenAdded = null, string? descr = null)
@@ -35,7 +31,7 @@ namespace Integration.Api.Controllers.Food
             return new FoodItemInputDto
             {
                 Description = descr ?? "Quiche",
-                SugarMass = sugar ?? 400,
+                SugarMass = sugar ?? 50,
                 WhenAdded = whenAdded ?? DateTime.Now
             };
         }

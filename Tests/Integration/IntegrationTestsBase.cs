@@ -16,22 +16,18 @@ namespace Integration
 
         protected IntegrationTestsBase()
         {
-            var options = createNewContextOptions();
-            DbContext = new AppDbContext(options);
+            DbContext = new AppDbContext(createNewContextOptions());
             DbInitializer.Initialize(DbContext);
         }
 
-        protected IUsersRepository GetRepository() => new UsersRepository(DbContext);
-        protected ISessionsRepository GetAuthRepository() => new SessionsRepository(DbContext);
-        protected IFoodRepository GetFoodRepository() => new FoodRepository(DbContext);
+        protected IUsersRepository UsersRepo { get; } = new UsersRepository();
+        protected ISessionsRepository AuthRepo { get; } = new SessionsRepository();
+        protected IFoodRepository FoodRepo { get; } = new FoodRepository();
 
-        protected RequestContext GetContextForAdmin()
-        {
-            return new RequestContext
+        protected RequestContext AdminContext { get; } = new RequestContext
             {
                 CurrentUser = new UserInfo { Id = 1, Role = UserRole.Admin }
             };
-        }
 
         private static DbContextOptions<AppDbContext> createNewContextOptions()
         {

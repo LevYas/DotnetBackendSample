@@ -9,30 +9,21 @@ namespace Integration.Api.Controllers.Users
 {
     public class UsersControllerCreateUser : UsersControllerTestsBase
     {
-        private readonly IUsersRepository _repository;
-        private readonly UsersController _controller;
-
-        public UsersControllerCreateUser()
-        {
-            _repository = GetRepository();
-            _controller = new UsersController(GetContextForAdmin(), _repository);
-        }
-
         [Fact]
         public async void CreateUserSavesUserToDb()
         {
             const string login = "login";
 
-            await _controller.CreateUser(CreateNewUserDto(login));
+            await UsersController.CreateUser(CreateNewUserDto(login));
 
-            PaginatedList<UserInfo>? result = await _repository.GetList(false, DefaultRequestParams);
+            PaginatedList<UserInfo>? result = await UsersRepo.GetList(false, DefaultRequestParams);
             Assert.Contains(result!.Items, u => u.Login == login);
         }
 
         [Fact]
         public async void CreatesUserWithUserRole()
         {
-            var result = await _controller.CreateUser(CreateNewUserDto("test1"));
+            var result = await UsersController.CreateUser(CreateNewUserDto("test1"));
 
             Assert.Equal(UserRole.User, result.Value.Role);
         }
@@ -42,7 +33,7 @@ namespace Integration.Api.Controllers.Users
         {
             const string login = "newlogin";
 
-            var result = await _controller.CreateUser(CreateNewUserDto(login));
+            var result = await UsersController.CreateUser(CreateNewUserDto(login));
 
             UserInfoDto userInfo = result.Value;
             Assert.Equal(login, userInfo.Login);
@@ -52,9 +43,9 @@ namespace Integration.Api.Controllers.Users
         public async void DoesNotCreateDuplicates()
         {
             const string login = "newLogin";
-            await _controller.CreateUser(CreateNewUserDto(login));
+            await UsersController.CreateUser(CreateNewUserDto(login));
 
-            var result = await _controller.CreateUser(CreateNewUserDto(login));
+            var result = await UsersController.CreateUser(CreateNewUserDto(login));
 
             Assert.IsType<ConflictObjectResult>(result.Result);
         }

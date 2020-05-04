@@ -7,13 +7,11 @@ namespace Integration.Api.Controllers.Users
 {
     public class UsersControllerTestsBase : IntegrationTestsBase
     {
-        protected readonly IUsersRepository UsersRepo;
         protected readonly UsersController UsersController;
 
         public UsersControllerTestsBase()
         {
-            UsersRepo = GetRepository();
-            UsersController = new UsersController(GetContextForAdmin(), UsersRepo);
+            UsersController = new UsersController(AdminContext, UsersRepo);
         }
 
         protected UsersRequest DefaultRequestParams => new UsersRequest(new PaginationParams
