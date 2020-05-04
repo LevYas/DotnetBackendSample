@@ -36,16 +36,16 @@ namespace Integration.Api.Controllers.Food
             };
         }
 
-        protected async Task<int> AddItemToRoot(int? calories = null, DateTime? whenAdded = null, string? descr = null)
+        protected async Task<int> AddItemToRoot(int? sugar = null, DateTime? whenAdded = null, string? descr = null)
         {
-            FoodItemDto item = await AddItemToRootAndReturnIt(calories, whenAdded, descr);
+            FoodItemDto item = await AddItemToRootAndReturnIt(sugar, whenAdded, descr);
             return item.Id;
         }
 
-        protected async Task<FoodItemDto> AddItemToRootAndReturnIt(int? calories = null, DateTime? whenAdded = null,
+        protected async Task<FoodItemDto> AddItemToRootAndReturnIt(int? sugar = null, DateTime? whenAdded = null,
             string? descr = null)
         {
-            ActionResult<FoodItemDto> addedItem = await Controller.AddItemToUser(1, CreateFoodInput(calories, whenAdded, descr));
+            ActionResult<FoodItemDto> addedItem = await Controller.AddItemToUser(1, CreateFoodInput(sugar, whenAdded, descr));
             return addedItem.Value;
         }
 
