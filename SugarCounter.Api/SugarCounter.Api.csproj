@@ -7,6 +7,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SugarCounter.Core\SugarCounter.Core.csproj" />
+      <ProjectReference Include="..\SugarCounter.DataAccess\SugarCounter.DataAccess.csproj" />
     </ItemGroup>
 
     <ItemGroup>
