@@ -29,7 +29,7 @@ namespace SugarCounter.Api.Controllers.Users
             if (!UserRolesHelper.CanAssignRoleForNewUser(_requestContext.CurrentUserRaw, roleToUse))
                 return Forbid();
 
-            var result = await _usersRepo.Create(input.Login, input.Password, roleToUse);
+            Res<UserInfo, CreateUserError> result = await _usersRepo.Create(input.Login, input.Password, roleToUse);
 
             return Match(result, onOk: u => new UserInfoDto(u),
                 (CreateUserError.UserAlreadyExists, () => Conflict("User with this name is already created")),

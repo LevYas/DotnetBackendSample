@@ -23,17 +23,6 @@ namespace SugarCounter.Api.Controllers
             );
         }
 
-        protected ActionResult Match<TError>(Res<TError> res, Func<ActionResult> onOk,
-                params (TError, Func<ActionResult>)[] errHandlers)
-            where TError : struct, Enum
-        {
-            return res.Match(
-                onOk: () => onOk(),
-                defaultHandler: () => reportMissingHandler(typeof(TError)),
-                errorHandlers: errHandlers
-            );
-        }
-
         private ActionResult reportMissingHandler(Type errorType)
         {
             return Problem($"To developers: not all the errors handled from {errorType.Name}");
