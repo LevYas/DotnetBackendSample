@@ -1,0 +1,18 @@
+image: Visual Studio 2019
+
+environment:
+  CONNECTION_STRING: Server=(local)\SQL2019;Database=master;User ID=sa;Password=Password12!
+
+init:
+- net start MSSQL$SQL2019
+
+before_build:
+- cmd: nuget restore
+
+configuration: Release
+
+build:
+  verbosity: minimal
+
+test_script:
+- cmd: dotnet test "Tests\Unit\Unit.csproj" --configuration Release --no-build && dotnet test "Tests\Integration\Integration.csproj" --configuration Release --no-build

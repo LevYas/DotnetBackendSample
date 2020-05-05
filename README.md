@@ -1,5 +1,7 @@
 # Sample Web API application
 
+[![Build status](https://ci.appveyor.com/api/projects/status/5ib0tcy7o0pyhpft?svg=true)](https://ci.appveyor.com/project/LevYas/dotnetbackendsample)
+
 This is a backend application example (or template) that can show how to build a fully-functional Web API with users, roles, authentication, integration with another API, and a lot of tests.
 
 Using this application, users can create and an account, log in, and store some food records to track sugar consumption. If the user does not provide the sugar amount, the app will fetch it from a nutrition data provider. Also, users can access API to check how much sugar they ate during the current day.
