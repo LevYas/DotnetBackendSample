@@ -37,6 +37,10 @@ namespace Functional.ApiCallers
         public Task<FoodItemDto> GetItem(int id) => ReadResponse<FoodItemDto>(SendGetItem(id));
         public async Task<HttpResponseMessage> SendGetItem(int id) => await Client.GetAsync($"{FoodUrl}/{id}");
 
+        public Task<int> GetTodaysSugar(int id) => ReadResponse<int>(SendGetTodaysSugar(id));
+        public async Task<HttpResponseMessage> SendGetTodaysSugar(int id)
+            => await Client.GetAsync($"{FoodUrl}/ofUser/{id}/todaysSugar");
+
         public Task<PaginatedListDto<FoodItemDto>> GetItemsOfCurrentUser(int? pageNumber = null, int? itemsPerPage = null)
         {
             return ReadResponse<PaginatedListDto<FoodItemDto>>(SendGetItemsOfCurrentUser(pageNumber, itemsPerPage));

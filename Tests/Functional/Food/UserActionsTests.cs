@@ -54,6 +54,17 @@ namespace Functional.Food
         }
 
         [Fact]
+        public async Task CanGetOwnedSugar()
+        {
+            FoodItemInputDto newItem = FoodApi.CreateNewFoodInput(sugar: 50000);
+            await FoodApi.AddItemForCurrentUser(newItem);
+
+            int result = await FoodApi.GetTodaysSugar(_user.Id);
+
+            Assert.True(result >= 50000);
+        }
+
+        [Fact]
         public async Task CanGetOwnedItems()
         {
             await FoodApi.AddItemForCurrentUser(FoodApi.CreateNewFoodInput());

@@ -107,6 +107,16 @@ namespace SugarCounter.DataAccess.Repositories
             }
         }
 
+        public async Task<int> GetTodaysSugar(int userId)
+        {
+            DateTime currentDay = DateTime.Now.Date;
+
+            return await _context.FoodItems
+                .AsNoTracking()
+                .Where(i => i.UserInfoId == userId && i.WhenAdded.Date == currentDay)
+                .SumAsync(i => i.SugarMass);
+        }
+
         private async Task<FoodItem?> getItemById(int itemId)
             => await _context.FoodItems.AsNoTracking().SingleOrDefaultAsync(i => i.Id == itemId);
     }

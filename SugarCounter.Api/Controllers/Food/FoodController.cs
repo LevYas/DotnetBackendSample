@@ -113,6 +113,15 @@ namespace SugarCounter.Api.Controllers.Food
             return result ? (ActionResult)NoContent() : Problem();
         }
 
+        [HttpGet("ofUser/{userId}/todaysSugar")]
+        public async Task<ActionResult<int>> GetTodaysSugar(int userId)
+        {
+            if (isAssessForbidden(userId))
+                return NotFound();
+
+            return await _repository.GetTodaysSugar(userId);
+        }
+
         private async Task<ActionResult<PaginatedListDto<FoodItemDto>>> getItems(
             FoodRequestDto? requestParams, int? userId = null)
         {
@@ -127,15 +136,15 @@ namespace SugarCounter.Api.Controllers.Food
                 return items.ToDto(item => new FoodItemDto(item));
         }
 
-        private bool isAssessForbidden(FoodItem foodItem)
+        private bool isAssessForbidden(int userInfoId)
         {
-            return foodItem.UserInfoId != _requestContext.CurrentUser.Id && _requestContext.CurrentUser.Role != UserRole.Admin;
+            return userInfoId != _requestContext.CurrentUser.Id && _requestContext.CurrentUser.Role != UserRole.Admin;
         }
 
         private ActionResult? checkForAccessError(int itemId, FoodItem? foodItem)
         {
             // we do not want to share information that resource exists, so, in any case return 404
-            return foodItem == null || isAssessForbidden(foodItem)
+            return foodItem == null || isAssessForbidden(foodItem.UserInfoId)
                 ? NotFound($"Item with id={itemId} is not found")
                 : null;
         }

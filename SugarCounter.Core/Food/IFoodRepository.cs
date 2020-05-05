@@ -10,5 +10,6 @@ namespace SugarCounter.Core.Food
         Task<FoodItem?> GetById(int itemId);
         Task<bool> Update(FoodItem newValue);
         Task<bool> Delete(FoodItem item);
+        Task<int> GetTodaysSugar(int userId);
     }
 }
