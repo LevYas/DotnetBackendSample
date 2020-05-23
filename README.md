@@ -32,6 +32,7 @@ At the moment, there are more than 160 tests in total.
 Future plans
 - Use Refit to consume third-party REST APIs as live interfaces
 - Try to use the Command pattern to see how it helps to separate routing logic from handling logic
+- Automatically register all the public classes against their implemented interfaces(s) into the DI provider using https://github.com/JonPSmith/NetCore.AutoRegisterDi or https://github.com/khellang/Scrutor
 
 #### SugarCounter.DataAccess
 I considered three approaches to store database entity classes with the column type, restrictions, and index information:
@@ -75,6 +76,9 @@ This class is inspired by concepts of Monad and Sum types from Functional progra
 #### Tests\Functional
 - Used `WebApplicationFactory` to provide separate testing configuration for the server-under-tests, and to automatically create configured `HttpClient`
 - Used WireMock.NET to mock responses from third-party APIs
+
+#### Future plans
+- Automatically register all the public classes against their implemented interfaces(s) into the DI provider using https://github.com/JonPSmith/NetCore.AutoRegisterDi or https://github.com/khellang/Scrutor
 
 ## How to debug (on Windows)
 1. Install Visual Studio 2019 16.4 or later (Community Edition is enough) with the ASP.NET Core and web development workload.
