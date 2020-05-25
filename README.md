@@ -85,8 +85,7 @@ This class is inspired by concepts of Monad and Sum types from Functional progra
     As an alternative, Visual Studio Code could be used with C# for Visual Studio Code (latest version)
 1. Install .NET Core 3.1 SDK
 1. Install MS SQL Server 2019 (Express Edition is enough)
-1. Install SQL Server Management Studio 18
-1. Connect to the SQL server and execute script `DatabaseInitialization.sql` to create a dedicated user
+1. Execute script `Deploy\initDatabaseUser.cmd <your SQL Server instance name>` to create a dedicated user. This script relies on Windows Authentication in SQL Server
 1. Open file `SugarCounter.sln`
 1. Now you can browse the code and build the solution
 1. To run the tests:
@@ -97,7 +96,7 @@ This class is inspired by concepts of Monad and Sum types from Functional progra
 1. Install .NET Core 3.1 SDK
 2. Install MS SQL Server 2019 (Express Edition is enough)
 
-    2.1 if installed local, create a user with `DatabaseInitialization.sql` script
+    2.1 if installed local, create a user with `Deploy\initDatabaseUser.sql` script
 
     2.2 if not local, set proper connection strings in `SugarCounter.Api\appsettings.json` and in `Tests\Functional\functionalTesting.json`
 3. From the solution dir execute `dotnet build --configuration Release && dotnet test --configuration Release` or equivalent for your shell
@@ -116,4 +115,4 @@ This class is inspired by concepts of Monad and Sum types from Functional progra
 
 ## Troubleshooting
 1. If all functional tests failed or app failed to start properly, check server address in connection strings. If you use another SQL server it could be different, i.e. `server=(local)`
-2. If it didn't help, manually create DB login with credentials and rights to create and delete databases as mentioned in `DatabaseInitialization.sql` script
+2. If it didn't help, manually create DB login with credentials and rights to create and delete databases as mentioned in `Deploy\initDatabaseUser.sql` script

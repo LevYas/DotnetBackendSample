@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
-    "DefaultConnection": "server=.\\SQLEXPRESS;Initial Catalog=SugarCounterTest;User ID=CaloriesStorageDev;Password=123;"
+    "DefaultConnection": "server=.\\SQLEXPRESS;Initial Catalog=SugarCounterTest;User ID=SugarCounterDev;Password=123;"
   },
   "NutritionixKeys": {
     "ServerUrl": "http://localhost:9999/"

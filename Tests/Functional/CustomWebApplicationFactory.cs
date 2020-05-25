@@ -39,7 +39,10 @@ namespace Functional
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "An error occurred while initializing the test database. Error: {ex.Message}");
+                    string connectionString = scopedServices.GetRequiredService<IConfiguration>()
+                        .GetConnectionString("DefaultConnection");
+
+                    logger.LogError(ex, $"Failed to initialize the test database using connection string: '{connectionString}'");
                 }
             });
         }
