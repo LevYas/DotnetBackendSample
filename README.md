@@ -73,6 +73,8 @@ One could convert the result using `Map`, and if the error and the final data ty
 
 This class is inspired by concepts of Monad and Sum types from Functional programming.
 
+By the way, in C# 9.0, there is announced a new pattern-matching (more info [here](https://devblogs.microsoft.com/dotnet/welcome-to-c-9-0/#improved-pattern-matching)), which will significantly simplify the code.
+
 #### Tests\Functional
 - Used `WebApplicationFactory` to provide separate testing configuration for the server-under-tests, and to automatically create configured `HttpClient`
 - Used WireMock.NET to mock responses from third-party APIs
