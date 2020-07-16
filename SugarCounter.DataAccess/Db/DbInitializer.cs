@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace SugarCounter.DataAccess.Db
 {
-    // In real-life appplication I would use EF Core migration feature
+    // In real-life application I would use EF Core migration feature
     public class DbInitializer
     {
         public static void Initialize(IServiceProvider services)
