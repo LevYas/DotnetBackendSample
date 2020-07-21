@@ -51,6 +51,9 @@ I considered three approaches to store database entity classes with the column t
 
 For now, I ended up with the third approach because it provides the separation of concerns I want with minimum efforts.
 
+Future plans
+- Unify repository interfaces and classes using the approach described here https://www.programmingwithwolfgang.com/repository-and-unit-of-work-pattern/
+
 #### SugarCounter.Core
 Apart from the common interfaces and models, the assembly contains class `Res`, located in `Shared\Result.cs`. This is a class, used to encapsulate the evaluation result of a function, when the function can return either desired result or error information. This result then could be matched to different execution flows - success flow, which receives a valid result or error flow, which receives the information about the error:
 
