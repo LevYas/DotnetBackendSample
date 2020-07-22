@@ -16,7 +16,7 @@ namespace SugarCounter.Api.Controllers.Food
 
     public class NutritionixClient : INutritionDataProvider
     {
-        private readonly HttpClient _client = new HttpClient();
+        private readonly HttpClient _client;
         private readonly ILogger<NutritionixClient> _logger;
 
         public NutritionixClient(IConfiguration configuration, HttpClient client, ILogger<NutritionixClient> logger)
