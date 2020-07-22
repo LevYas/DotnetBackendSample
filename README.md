@@ -30,9 +30,8 @@ At the moment, there are more than 160 tests in total.
 - Actively used Data Annotations for data transfer objects' validation
 
 Future plans
-- Use Refit to consume third-party REST APIs as live interfaces
+- Use [Refit](https://github.com/reactiveui/refit) to consume third-party REST APIs as live interfaces
 - Try to use the Command pattern to see how it helps to separate routing logic from handling logic
-- Automatically register all the public classes against their implemented interfaces(s) into the DI provider using https://github.com/JonPSmith/NetCore.AutoRegisterDi or https://github.com/khellang/Scrutor
 
 #### SugarCounter.DataAccess
 I considered three approaches to store database entity classes with the column type, restrictions, and index information:
@@ -52,7 +51,7 @@ I considered three approaches to store database entity classes with the column t
 For now, I ended up with the third approach because it provides the separation of concerns I want with minimum efforts.
 
 Future plans
-- Unify repository interfaces and classes using the approach described here https://www.programmingwithwolfgang.com/repository-and-unit-of-work-pattern/
+- Unify repository interfaces and classes using the approach described [here](https://www.programmingwithwolfgang.com/repository-and-unit-of-work-pattern/)
 
 #### SugarCounter.Core
 Apart from the common interfaces and models, the assembly contains class `Res`, located in `Shared\Result.cs`. This is a class, used to encapsulate the evaluation result of a function, when the function can return either desired result or error information. This result then could be matched to different execution flows - success flow, which receives a valid result or error flow, which receives the information about the error:
@@ -83,7 +82,7 @@ By the way, in C# 9.0, there is announced a new pattern-matching (more info [her
 - Used WireMock.NET to mock responses from third-party APIs
 
 #### Future plans
-- Automatically register all the public classes against their implemented interfaces(s) into the DI provider using https://github.com/JonPSmith/NetCore.AutoRegisterDi or https://github.com/khellang/Scrutor
+- Automatically register all the public classes against their implemented interfaces(s) into the DI provider using [AutoRegisterDi](https://github.com/JonPSmith/NetCore.AutoRegisterDi) or [Scrutor](https://github.com/khellang/Scrutor)
 
 ## How to debug (on Windows)
 1. Install Visual Studio 2019 16.4 or later (Community Edition is enough) with the ASP.NET Core and web development workload.
