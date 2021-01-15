@@ -26,7 +26,7 @@ namespace SugarCounter.Api.Auth
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            if (!context.HttpContext.User.Identity.IsAuthenticated)
+            if (context.HttpContext.User.Identity?.IsAuthenticated != true)
             {
                 context.Result = new UnauthorizedResult();
                 return;

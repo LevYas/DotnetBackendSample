@@ -34,7 +34,7 @@ namespace Functional.ApiCallers
 
         protected string CombineUrl(string url, int? pageNumber = null, int? itemsPerPage = null)
         {
-            var query = new Dictionary<string, string>();
+            var query = new Dictionary<string, string?>();
 
             if (pageNumber != null)
                 query.Add("pageNumber", pageNumber.Value.ToString());

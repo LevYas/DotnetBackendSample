@@ -14,7 +14,7 @@ namespace SugarCounter.Core.Shared
     //
     // They're built up using concepts of Monad and sum types in mind
 
-    public abstract class ResBase<TError>
+    public abstract class ResBase<TError> where TError: notnull
     {
         // Check for valid tuple collection with no duplicate keys
         // Intent is to hit possible error during the first debug run of Match methods
@@ -27,19 +27,19 @@ namespace SugarCounter.Core.Shared
         protected TResult MatchError<TResult>(TError errorValue, Func<TResult> defaultHandler,
             (TError, Func<TResult>)[] errorHandlers)
         {
-            if (toDictionary(errorHandlers).TryGetValue(errorValue, out Func<TResult> handle))
+            if (toDictionary(errorHandlers).TryGetValue(errorValue, out Func<TResult>? handle))
                 return handle();
             else
                 return defaultHandler();
         }
 
-        private Dictionary<TError, Func<TResult>> toDictionary<TResult>((TError, Func<TResult>)[] errorHandlers)
+        private static Dictionary<TError, Func<TResult>> toDictionary<TResult>((TError, Func<TResult>)[] errorHandlers)
         {
             return errorHandlers.ToDictionary(k => k.Item1, e => e.Item2);
         }
     }
 
-    public abstract class Res<TData, TError> : ResBase<TError>
+    public abstract class Res<TData, TError> : ResBase<TError> where TError: notnull
     {
         public class Data : Res<TData, TError>
         {
@@ -121,7 +121,7 @@ namespace SugarCounter.Core.Shared
         }
     }
 
-    public abstract class Res<TError> : ResBase<TError>
+    public abstract class Res<TError> : ResBase<TError> where TError: notnull
     {
         public class NoData : Res<TError> { }
         public static implicit operator Res<TError>(Res.OkMarker _) => new NoData();
@@ -153,24 +153,24 @@ namespace SugarCounter.Core.Shared
         public static OkMarker Ok { get; } = new OkMarker();
 
         public static async Task<Res<TResult, TError>> ThenMap<TResult, TData, TError>
-            (this Task<Res<TData, TError>> inputTask, Func<TData, Task<TResult>> mapping)
+            (this Task<Res<TData, TError>> inputTask, Func<TData, Task<TResult>> mapping) where TError: notnull
         {
             return await (await inputTask).Map(input => mapping(input));
         }
 
         public static async Task<Res<TResult, TError>> ThenMap<TResult, TData, TError>
-            (this Task<Res<TData, TError>> inputTask, Func<TData, TResult> mapping)
+            (this Task<Res<TData, TError>> inputTask, Func<TData, TResult> mapping) where TError: notnull
         {
             return (await inputTask).Map(input => mapping(input));
         }
 
         public static async Task<TResult> ThenMatch<TResult, TData, TError>
-            (this Task<Res<TData, TError>> inputTask, Func<TData, TResult> onOk, Func<TError, TResult> onErr)
+            (this Task<Res<TData, TError>> inputTask, Func<TData, TResult> onOk, Func<TError, TResult> onErr) where TError: notnull
         {
             return (await inputTask).Match(onOk, onErr);
         }
 
-        public static async Task<TOut> ThenGet<TOut>(this Task<Res<TOut, TOut>> inputTask)
+        public static async Task<TOut> ThenGet<TOut>(this Task<Res<TOut, TOut>> inputTask) where TOut: notnull
         {
             return (await inputTask).Get<TOut>();
         }
