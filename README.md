@@ -82,12 +82,12 @@ By the way, in C# 9.0, there is announced a new pattern-matching (more info [her
 - Used WireMock.NET to mock responses from third-party APIs
 
 #### Future plans
-- Automatically register all the public classes against their implemented interfaces(s) into the DI provider using [AutoRegisterDi](https://github.com/JonPSmith/NetCore.AutoRegisterDi) or [Scrutor](https://github.com/khellang/Scrutor)
+- Automatically register all the public classes against their implemented interfaces(s) into the DI provider using [Scrutor](https://github.com/khellang/Scrutor)
 
 ## How to debug (on Windows)
-1. Install Visual Studio 2019 16.4 or later (Community Edition is enough) with the ASP.NET Core and web development workload.
+1. Install Visual Studio 2019 16.8.3 or later (Community Edition is enough) with the ASP.NET Core and web development workload.
     As an alternative, Visual Studio Code could be used with C# for Visual Studio Code (latest version)
-1. Install .NET Core 3.1 SDK
+1. Install .NET 5 SDK
 1. Install MS SQL Server 2019 (Express Edition is enough)
 1. Execute script `Deploy\initDatabaseUser.cmd <your SQL Server instance name>` to create a dedicated user. This script relies on Windows Authentication in SQL Server
 1. Open file `SugarCounter.sln`
@@ -97,7 +97,7 @@ By the way, in C# 9.0, there is announced a new pattern-matching (more info [her
     1. Press the "Run All Tests" button
 
 ## How to build and test (on Windows or supported Linux distributives)
-1. Install .NET Core 3.1 SDK
+1. Install .NET 5 SDK
 2. Install MS SQL Server 2019 (Express Edition is enough)
 
     2.1 if installed local, create a user with `Deploy\initDatabaseUser.sql` script
@@ -111,7 +111,7 @@ By the way, in C# 9.0, there is announced a new pattern-matching (more info [her
 
    2.1. from code: inside the solution's folder execute command `dotnet run --project SugarCounter.Api --configuration Release` 
 
-   2.2. from build result: call the executable file located at `SugarCounter.Api\bin\Release\netcoreapp3.1\SugarCounter.Api.exe`
+   2.2. from build result: call the executable file located at `SugarCounter.Api\bin\Release\net5.0\SugarCounter.Api.exe`
 
 ### Deploy considerations
 - The app should operate behind reverse-proxy
