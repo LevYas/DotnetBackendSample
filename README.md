@@ -81,9 +81,6 @@ By the way, in C# 9.0, there is announced a new pattern-matching (more info [her
 - Used `WebApplicationFactory` to provide separate testing configuration for the server-under-tests, and to automatically create configured `HttpClient`
 - Used WireMock.NET to mock responses from third-party APIs
 
-#### Future plans
-- Automatically register all the public classes against their implemented interfaces(s) into the DI provider using [Scrutor](https://github.com/khellang/Scrutor)
-
 ## How to debug (on Windows)
 1. Install Visual Studio 2019 16.8.3 or later (Community Edition is enough) with the ASP.NET Core and web development workload.
     As an alternative, Visual Studio Code could be used with C# for Visual Studio Code (latest version)

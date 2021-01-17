@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SugarCounter.Core.Food;
-using SugarCounter.Core.Sessions;
-using SugarCounter.Core.Users;
 using SugarCounter.DataAccess.Db;
-using SugarCounter.DataAccess.Repositories;
 
 namespace SugarCounter.DataAccess
 {
@@ -12,11 +8,13 @@ namespace SugarCounter.DataAccess
     {
         public static IServiceCollection ConfigureDataAccess(this IServiceCollection services, string connectionString)
         {
-            services.AddScoped<ISessionsRepository, SessionsRepository>();
-            services.AddScoped<IUsersRepository, UsersRepository>();
-            services.AddScoped<IFoodRepository, FoodRepository>();
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
-            return services;
+            return services.Scan(s => s
+                    .FromAssemblyOf<Dummy>() // FromExecutingAssembly assembly doesn't always work well, especially in tests
+                    .AddClasses()
+                    .AsMatchingInterface())
+                .AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
         }
+
+        private abstract class Dummy {}
     }
 }
