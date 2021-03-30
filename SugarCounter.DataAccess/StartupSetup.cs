@@ -10,7 +10,7 @@ namespace SugarCounter.DataAccess
         {
             return services.Scan(s => s
                     .FromAssemblyOf<Dummy>() // FromExecutingAssembly assembly doesn't always work well, especially in tests
-                    .AddClasses()
+                    .AddClasses(publicOnly: false)
                     .AsMatchingInterface())
                 .AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
         }
