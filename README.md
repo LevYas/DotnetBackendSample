@@ -7,7 +7,7 @@ This is a backend application example (or template) that can show how to build a
 Using this application, users can create and an account, log in, and store some food records to track sugar consumption. If the user does not provide the sugar amount, the app will fetch it from a nutrition data provider. Also, users can access API to check how much sugar they ate during the current day.
 
 ## The Project's structure
-Backend is powered by ASP.NET Core and written in C# with Nullable Reference Types feature. The Backend consists of three projects:
+Backend is powered by ASP.NET 5 and written in C# with Nullable Reference Types feature. The Backend consists of three projects:
 
 1. SugarCounter.Api - entry point, contains controllers, manages access rights
 2. SugarCounter.DataAccess - repositories to provide data from the database
@@ -74,8 +74,6 @@ One could convert the result using `Map`, and if the error and the final data ty
     }
 
 This class is inspired by concepts of Monad and Sum types from Functional programming.
-
-By the way, in C# 9.0, there is announced a new pattern-matching (more info [here](https://devblogs.microsoft.com/dotnet/welcome-to-c-9-0/#improved-pattern-matching)), which will significantly simplify the code.
 
 #### Tests\Functional
 - Used `WebApplicationFactory` to provide separate testing configuration for the server-under-tests, and to automatically create configured `HttpClient`
